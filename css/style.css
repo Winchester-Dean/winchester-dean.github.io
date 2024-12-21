@@ -2,9 +2,34 @@ body {
     width: 100%;
     min-height: 100%;
     margin: 0;
-    background: url("../assets/background.jpg") center;
+    background: url("../assets/background.jpg") center fixed;
     background-size: cover;
     display: flex;
+}
+
+.blur {
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.center {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.info {
+    min-width: 300px;
+    width: 300px;
+    display: flex;
+    background: none;
+    padding: 35px;
+    color: var(--text-color);
+    border-radius: 16px; 
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    -khtml-border-radius: 16px;
+    border: none;
 }
 
 .typed {
@@ -66,17 +91,6 @@ body {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.buttons {
-    min-width: 300px;
-    width: 300px;
-    display: flex;
-    padding: 0px;
-    border-radius: 8px; 
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    -khtml-border-radius: 8px;
-}
-
 a.link {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -moz-tap-highlight-color: rgba(0,0,0,0);
@@ -107,7 +121,18 @@ a.link {
     width: 10em;
     height: 10em;
     border-radius: 5.6em;
-    border: #ffffff solid 2px;
+    border: blueviolet solid 2px;
+}
+
+.buttons {
+    min-width: 300px;
+    width: 300px;
+    display: flex;
+    padding: 0px;
+    border-radius: 8px; 
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -khtml-border-radius: 8px;
 }
 
 .stix {
@@ -163,3 +188,99 @@ a.nolink {
     outline: none;
     border: none;
 }
+
+.social a {
+    background-color: rgba(0,0,0,.15);
+    text-align: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 100%;
+    line-height: 2.5rem;
+    color: #212121;
+    font-size: 20px;
+}
+
+.social a:hover {
+    color: #dc3545;
+}
+
+.social a:active {
+    color: #fff;
+}
+
+.mx-2 {
+    margin-right: 0.5rem !important;
+}
+
+.social-icon {
+    fill: #212121;
+}
+
+.social-icon:hover {
+    fill: #f44336;
+}
+
+@media (prefers-color-scheme: light) {
+    #page-preloader {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 100500;
+        background: #F5F5F5;
+    }
+    #page-preloader .spin {
+        position: absolute;
+        color: #212121;
+        font-size: 36px;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+    }
+    
+    .pattern {
+        width: 100%;
+        height: 100%;
+        background-size: 50%;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    #page-preloader {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 100500;
+        background: #111;
+    }
+    
+    #page-preloader .spin {
+        position: absolute;
+        color: #f5f5f5;
+        font-size: 36px;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+    }
+    
+    .pattern {
+        background-size: 50%;
+    }
+}
+
+@media (min-width: 1281px) { .pattern {background-size: 50%;}}
+
+@media (min-width: 1025px) and (max-width: 1280px) {.pattern {background-size: 50%;}}
+
+@media (min-width: 768px) and (max-width: 1024px) {.pattern {background-size: 100%;}  }
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {.pattern {background-size: 100%;}}
+
+@media (min-width: 481px) and (max-width: 767px) { .pattern {background-size: 100%;}}
+
+@media (min-width: 320px) and (max-width: 480px) {.pattern {background-size: 100%;}}
