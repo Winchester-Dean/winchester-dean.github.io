@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>IP Information</title>
+    <meta property="og:title" content="IP Information">
+    <meta property="og:locale" content="ru_RU">
+    <meta name="author" content="Dean Winchester">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Информация об IP-адресе">
+    <meta property="og:url" content="https://deanchik.ru/ip.html">
+    <meta property="og:site_name" content="Dean Winchester">
+    <meta property="og:image" content="./assets/icon.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/icon.jpg" type="image/jpg">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/vars.css">
+    <meta name="theme-color" content="#191919">
+</head>
+<body class="center blur">
+    <header class="center info">
+        <div class="center pizdec">
+            <div class="avatar-container">
+                <img src="./assets/icon.jpg" oncontextmenu="return false;" class="avatar">
+            </div>
+            <h2>IP Information</h2>
+            <hr width="295">
+            <div class="ip-info">
+                <h3>Ваш IP адрес:</h3>
+                <p id="ip-address">Загрузка...</p>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        // Функция для получения и отображения IP-адреса
+        async function fetchIPAddress() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                document.getElementById('ip-address').textContent = data.ip;
+            } catch (error) {
+                document.getElementById('ip-address').textContent = 'Не удалось загрузить IP адрес';
+            }
+        }
+
+        // Вызов функции для получения IP-адреса при загрузке страницы
+        fetchIPAddress();
+    </script>
+</body>
+</html>
