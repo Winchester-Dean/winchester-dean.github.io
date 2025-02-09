@@ -4,7 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IP Information</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em 0;
+        }
+
+        main {
+            padding: 2em;
+        }
+
+        form {
+            margin-bottom: 2em;
+        }
+
+        input[type="text"] {
+            padding: 0.5em;
+            font-size: 1em;
+            margin-right: 1em;
+            width: 200px;
+        }
+
+        button {
+            padding: 0.5em 1em;
+            font-size: 1em;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #result {
+            background-color: #fff;
+            padding: 1em;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1em 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,7 +85,7 @@
         <div id="result" class="hidden">
             <h2>IP Information</h2>
             <p><strong>IP:</strong> <span id="query"></span></p>
-            <p><strong>Country:</strong> <span id="country"></span> <img id="flag" alt="Flag" src=""></p>
+            <p><strong>Country:</strong> <img id="flag" alt="Flag" src=""> <span id="country"></span></p>
             <p><strong>City:</strong> <span id="city"></span></p>
             <p><strong>DNS:</strong> <span id="dns"></span></p>
             <p><strong>UserAgent:</strong> <span id="userAgent"></span></p>
@@ -28,6 +94,30 @@
     <footer>
         <p>© 2025 Winchester-Dean</p>
     </footer>
-    <script src="script.js"></script>
+    <script>
+        document.getElementById('ipForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const ip = document.getElementById('ipAddress').value;
+            fetch(`http://ip-api.com/json/${ip}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,isp,org,as,reverse,mobile,proxy,hosting,query`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        document.getElementById('query').innerText = data.query;
+                        document.getElementById('country').innerText = `${data.country} (${data.countryCode})`;
+                        document.getElementById('flag').src = `https://cdn.vaar.pp.ua/img/flags/32/${data.countryCode}.png`;
+                        document.getElementById('city').innerText = data.city;
+                        document.getElementById('dns').innerText = data.reverse;
+                        document.getElementById('userAgent').innerText = navigator.userAgent;
+                        document.getElementById('result').classList.remove('hidden');
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching IP info:', error);
+                    alert('An error occurred while fetching the IP information.');
+                });
+        });
+    </script>
 </body>
 </html>
