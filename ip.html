@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Объединенный Сайт</title>
-    <link rel="stylesheet" href="ip_styles.css">
+    <title>IP Information</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Объединенный Сайт</h1>
+        <h1>IP Information Lookup</h1>
     </header>
     <main>
-        <section id="site1-content">
-            <h2>IP Информация</h2>
-            <p id="ip-info">Загрузка...</p>
-        </section>
-        <section id="site2-content">
-            <h2>Другой Контент</h2>
-            <p>Контент с сайта https://winchester-dean.github.io/ip</p>
-        </section>
+        <form id="ipForm">
+            <label for="ipAddress">Enter IP Address:</label>
+            <input type="text" id="ipAddress" name="ipAddress" required>
+            <button type="submit">Get Info</button>
+        </form>
+        <div id="result" class="hidden">
+            <h2>IP Information</h2>
+            <p><strong>IP:</strong> <span id="query"></span></p>
+            <p><strong>Country:</strong> <span id="country"></span> <img id="flag" alt="Flag" src=""></p>
+            <p><strong>City:</strong> <span id="city"></span></p>
+            <p><strong>DNS:</strong> <span id="dns"></span></p>
+            <p><strong>UserAgent:</strong> <span id="userAgent"></span></p>
+        </div>
     </main>
     <footer>
-        <p>&copy; 2025 Объединенный Сайт</p>
+        <p>© 2025 Winchester-Dean</p>
     </footer>
-    <script src="ip_script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
