@@ -91,6 +91,10 @@
         footer p {
             margin: 0;
         }
+
+        .error {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -106,11 +110,12 @@
         <div id="result" class="hidden">
             <h2>IP Information</h2>
             <p><strong>IP:</strong> <span id="query"></span></p>
-            <p><strong>Country:</strong> <img id="flag" alt="Flag" src=""> <span id="country"></span></p>
+            <p><strong>Country:</strong> <span id="country"></span> <img id="flag" alt="Flag" src=""></p>
             <p><strong>City:</strong> <span id="city"></span></p>
             <p><strong>DNS:</strong> <span id="dns"></span></p>
             <p><strong>UserAgent:</strong> <span id="userAgent"></span></p>
         </div>
+        <div id="error" class="hidden error"></div>
     </main>
     <footer>
         <p>© 2025 Winchester-Dean</p>
@@ -133,12 +138,14 @@
                     if (data.status === 'success') {
                         displayIPInfo(data);
                     } else {
-                        alert('Error: ' + data.message);
+                        document.getElementById('error').innerText = 'Error: ' + data.message;
+                        document.getElementById('error').classList.remove('hidden');
                     }
                 })
                 .catch(error => {
                     console.error('Error fetching IP info:', error);
-                    alert('An error occurred while fetching the IP information.');
+                    document.getElementById('error').innerText = 'An error occurred while fetching the IP information.';
+                    document.getElementById('error').classList.remove('hidden');
                 });
         }
 
@@ -147,7 +154,8 @@
             .then(data => fetchIPInfo(data.ip))
             .catch(error => {
                 console.error('Error fetching user IP:', error);
-                alert('An error occurred while fetching the user IP.');
+                document.getElementById('error').innerText = 'An error occurred while fetching the user IP.';
+                document.getElementById('error').classList.remove('hidden');
             });
     </script>
 </body>
