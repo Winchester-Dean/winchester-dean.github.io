@@ -3,69 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IP Information</title>
-    <!-- Подключите здесь ваши стили из index.html -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f8f9fa;
-            color: #343a40;
-        }
-        .ip-info {
-            font-size: 1.2em;
-            line-height: 1.5;
-            background: #ffffff;
-            padding: 20px;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .ip-info-header {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-        .ip-info-item {
-            margin: 5px 0;
-        }
-    </style>
+    <title>Объединенный Сайт</title>
+    <link rel="stylesheet" href="ip_styles.css">
 </head>
 <body>
     <header>
-        <!-- Скопируйте ваш хедер из index.html -->
+        <h1>Объединенный Сайт</h1>
     </header>
-    
     <main>
-        <h1>IP Information</h1>
-        <div id="ip-info" class="ip-info">
-            Loading...
-        </div>
+        <section id="site1-content">
+            <h2>IP Информация</h2>
+            <p id="ip-info">Загрузка...</p>
+        </section>
+        <section id="site2-content">
+            <h2>Другой Контент</h2>
+            <p>Контент с сайта https://winchester-dean.github.io/ip</p>
+        </section>
     </main>
-    
     <footer>
-        <!-- Скопируйте ваш футер из index.html -->
+        <p>&copy; 2025 Объединенный Сайт</p>
     </footer>
-    
-    <script>
-        // Скрипт для получения и отображения IP-адреса
-        fetch('https://ipinfo.io/json?token=cfad7c80e137b2')
-            .then(response => response.json())
-            .then(data => {
-                const ipInfo = `
-<div class="ip-info-header">🌍 IP: ${data.ip}</div>
-<div class="ip-info-item">├ IP type: ${data.ip.includes(':') ? 'IPv6' : 'IPv4'}</div>
-<div class="ip-info-item">├ Provider: ${data.org}</div>
-<div class="ip-info-item">├ Country: ${data.country} ${data.country_code}</div>
-<div class="ip-info-item">├ Region: ${data.region} ${data.region_code}</div>
-<div class="ip-info-item">├ City: ${data.city}</div>
-<div class="ip-info-item">├ Domain: ${data.hostname || data.ip}</div>
-                `;
-                document.getElementById('ip-info').innerHTML = ipInfo;
-            })
-            .catch(error => {
-                document.getElementById('ip-info').innerText = 'Unable to get IP address information';
-                console.error('Error fetching IP address information:', error);
-            });
-    </script>
+    <script src="ip_script.js"></script>
 </body>
 </html>
