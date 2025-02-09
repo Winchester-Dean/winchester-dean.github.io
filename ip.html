@@ -6,17 +6,23 @@
     <title>IP Information</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             text-align: center;
-            background-color: #f0f0f0;
+            background-color: #d3d3d3; /* Серый фон по умолчанию */
         }
 
         header {
-            background-color: #333;
+            background-color: #4CAF50;
             color: #fff;
             padding: 1em 0;
+            box-shadow: 0 4px 2px -2px gray;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
         }
 
         main {
@@ -32,19 +38,22 @@
             font-size: 1em;
             margin-right: 1em;
             width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
 
         button {
             padding: 0.5em 1em;
             font-size: 1em;
-            background-color: #333;
+            background-color: #4CAF50;
             color: #fff;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
         }
 
         button:hover {
-            background-color: #555;
+            background-color: #45a049;
         }
 
         .hidden {
@@ -56,6 +65,18 @@
             padding: 1em;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            display: inline-block;
+            margin-top: 2em;
+        }
+
+        #result h2 {
+            margin-top: 0;
+        }
+
+        #result img {
+            vertical-align: middle;
+            margin-left: 10px;
         }
 
         footer {
@@ -77,7 +98,7 @@
         <h1>IP Information Lookup</h1>
     </header>
     <main>
-        <form id="ipForm">
+        <form id="ipForm" class="hidden">
             <label for="ipAddress">Enter IP Address:</label>
             <input type="text" id="ipAddress" name="ipAddress" required>
             <button type="submit">Get Info</button>
@@ -95,20 +116,22 @@
         <p>© 2025 Winchester-Dean</p>
     </footer>
     <script>
-        document.getElementById('ipForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const ip = document.getElementById('ipAddress').value;
+        function displayIPInfo(data) {
+            document.getElementById('query').innerText = data.query;
+            document.getElementById('country').innerText = `${data.country} (${data.countryCode})`;
+            document.getElementById('flag').src = `https://cdn.vaar.pp.ua/img/flags/32/${data.countryCode}.png`;
+            document.getElementById('city').innerText = data.city;
+            document.getElementById('dns').innerText = data.reverse;
+            document.getElementById('userAgent').innerText = navigator.userAgent;
+            document.getElementById('result').classList.remove('hidden');
+        }
+
+        function fetchIPInfo(ip) {
             fetch(`http://ip-api.com/json/${ip}?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,isp,org,as,reverse,mobile,proxy,hosting,query`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
-                        document.getElementById('query').innerText = data.query;
-                        document.getElementById('country').innerText = `${data.country} (${data.countryCode})`;
-                        document.getElementById('flag').src = `https://cdn.vaar.pp.ua/img/flags/32/${data.countryCode}.png`;
-                        document.getElementById('city').innerText = data.city;
-                        document.getElementById('dns').innerText = data.reverse;
-                        document.getElementById('userAgent').innerText = navigator.userAgent;
-                        document.getElementById('result').classList.remove('hidden');
+                        displayIPInfo(data);
                     } else {
                         alert('Error: ' + data.message);
                     }
@@ -117,7 +140,15 @@
                     console.error('Error fetching IP info:', error);
                     alert('An error occurred while fetching the IP information.');
                 });
-        });
+        }
+
+        fetch('https://api.ipify.org/?format=json')
+            .then(response => response.json())
+            .then(data => fetchIPInfo(data.ip))
+            .catch(error => {
+                console.error('Error fetching user IP:', error);
+                alert('An error occurred while fetching the user IP.');
+            });
     </script>
 </body>
 </html>
