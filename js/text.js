@@ -20,7 +20,12 @@ $(function () {
 });
 $(function () {
     $(".typed").typed({
-        strings: ['Dean Winchester', "Python, C++ developer", "VPS/VDS seller", "VPN seller", "bruh"],
+        strings: [
+            "Genius, Billionaire, Playboy",
+            "Full stack programmer",
+            "Python, C++ developer",
+            "bruh"
+        ],
         typeSpeed: 100,
         loop: true,
         cursorChar: "|",
