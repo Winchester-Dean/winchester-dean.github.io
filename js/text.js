@@ -21,9 +21,10 @@ $(function () {
 $(function () {
     $(".typed").typed({
         strings: [
-            "Genius, Billionaire, Playboy",
-            "Full stack programmer",
+            "My name is...",
             "Python, C++ developer",
+            "Know HTML, CSS, JS",
+            "Working on something new",
             "bruh"
         ],
         typeSpeed: 100,
